@@ -149,12 +149,16 @@
             font-size: 12px;
             margin-bottom: 8px;
         }
-        .summary-card .value {
+        .summary-card .value-wrapper {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 4px;
+        }
+        .summary-card .value {
             cursor: pointer;
-            border-bottom: 1px dashed #1a73e8;
         }
         .summary-card .value:hover {
             color: #1a73e8;
@@ -162,6 +166,20 @@
         .summary-card .unit {
             color: #5f6368;
             font-size: 12px;
+        }
+        .percent-change {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .percent-up {
+            color: #137333;
+            background-color: #e6f4ea;
+        }
+        .percent-down {
+            color: #b3261e;
+            background-color: #fef0ef;
         }
         .time-filter {
             display: flex;
@@ -223,10 +241,14 @@
             align-items: center;
             justify-content: center;
         }
-        .revenue-source-item .value {
+        .revenue-source-item .value-wrapper {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
             font-weight: 500;
+        }
+        .revenue-source-item .value {
             cursor: pointer;
-            border-bottom: 1px dashed #1a73e8;
         }
         .revenue-source-item .value:hover {
             color: #1a73e8;
@@ -326,22 +348,34 @@
                 <div class="summary-cards">
                     <div class="summary-card">
                         <div class="label">Ingresos estimados</div>
-                        <div class="value" onclick="openEditModal('revenue-1')" id="revenue-1">US$3,254.89</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('revenue-1')" id="revenue-1">US$3,254.89</div>
+                            <span class="percent-change percent-up" id="revenue-1-percent">+12.5%</span>
+                        </div>
                         <div class="unit">Total</div>
                     </div>
                     <div class="summary-card">
                         <div class="label">Reproducciones con ingresos</div>
-                        <div class="value" onclick="openEditModal('views-1')" id="views-1">678.4K</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('views-1')" id="views-1">678.4K</div>
+                            <span class="percent-change percent-up" id="views-1-percent">+8.3%</span>
+                        </div>
                         <div class="unit">Vistas</div>
                     </div>
                     <div class="summary-card">
                         <div class="label">CPM (Costo por mil)</div>
-                        <div class="value" onclick="openEditModal('cpm-1')" id="cpm-1">US$8.76</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('cpm-1')" id="cpm-1">US$8.76</div>
+                            <span class="percent-change percent-down" id="cpm-1-percent">-2.1%</span>
+                        </div>
                         <div class="unit">USD/mil vistas</div>
                     </div>
                     <div class="summary-card">
                         <div class="label">RPM (Ingresos por mil)</div>
-                        <div class="value" onclick="openEditModal('rpm-1')" id="rpm-1">US$4.32</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('rpm-1')" id="rpm-1">US$4.32</div>
+                            <span class="percent-change percent-up" id="rpm-1-percent">+5.7%</span>
+                        </div>
                         <div class="unit">USD/mil vistas</div>
                     </div>
                 </div>
@@ -357,28 +391,40 @@
                             <div class="icon">🎬</div>
                             <span>Fondo de YouTube Shorts</span>
                         </div>
-                        <div class="value" onclick="openEditModal('shorts-revenue-1')" id="shorts-revenue-1">US$1,290.45</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('shorts-revenue-1')" id="shorts-revenue-1">US$1,290.45</div>
+                            <span class="percent-change percent-up">+18.2%</span>
+                        </div>
                     </div>
                     <div class="revenue-source-item">
                         <div class="name">
                             <div class="icon">📢</div>
                             <span>Ingresos por anuncios</span>
                         </div>
-                        <div class="value" onclick="openEditModal('ads-revenue-1')" id="ads-revenue-1">US$1,540.32</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('ads-revenue-1')" id="ads-revenue-1">US$1,540.32</div>
+                            <span class="percent-change percent-up">+9.8%</span>
+                        </div>
                     </div>
                     <div class="revenue-source-item">
                         <div class="name">
                             <div class="icon">👥</div>
                             <span>Miembros del canal</span>
                         </div>
-                        <div class="value" onclick="openEditModal('members-revenue-1')" id="members-revenue-1">US$315.22</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('members-revenue-1')" id="members-revenue-1">US$315.22</div>
+                            <span class="percent-change percent-up">+7.4%</span>
+                        </div>
                     </div>
                     <div class="revenue-source-item">
                         <div class="name">
                             <div class="icon">💬</div>
                             <span>Super Chat y Super Stickers</span>
                         </div>
-                        <div class="value" onclick="openEditModal('superchat-revenue-1')" id="superchat-revenue-1">US$108.90</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('superchat-revenue-1')" id="superchat-revenue-1">US$108.90</div>
+                            <span class="percent-change percent-down">-3.1%</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -397,17 +443,26 @@
                 <div class="summary-cards">
                     <div class="summary-card">
                         <div class="label">Ingresos estimados</div>
-                        <div class="value" onclick="openEditModal('revenue-2')" id="revenue-2">$3,482.56</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('revenue-2')" id="revenue-2">$3,482.56</div>
+                            <span class="percent-change percent-up" id="revenue-2-percent">+15.8%</span>
+                        </div>
                         <div class="unit">Últimos 28 días</div>
                     </div>
                     <div class="summary-card">
                         <div class="label">RPM (Ingresos por mil)</div>
-                        <div class="value" onclick="openEditModal('rpm-2')" id="rpm-2">$7.89</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('rpm-2')" id="rpm-2">$7.89</div>
+                            <span class="percent-change percent-up" id="rpm-2-percent">+11.2%</span>
+                        </div>
                         <div class="unit">USD/mil vistas</div>
                     </div>
                     <div class="summary-card">
                         <div class="label">CPM (Costo por mil)</div>
-                        <div class="value" onclick="openEditModal('cpm-2')" id="cpm-2">$15.32</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('cpm-2')" id="cpm-2">$15.32</div>
+                            <span class="percent-change percent-down" id="cpm-2-percent">-4.3%</span>
+                        </div>
                         <div class="unit">USD/mil vistas</div>
                     </div>
                 </div>
@@ -423,21 +478,30 @@
                             <div class="icon">💳</div>
                             <span>Ingresos por transacciones (Super Chats y membresías)</span>
                         </div>
-                        <div class="value" onclick="openEditModal('transactions-revenue-2')" id="transactions-revenue-2">$125.40</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('transactions-revenue-2')" id="transactions-revenue-2">$125.40</div>
+                            <span class="percent-change percent-up">+6.7%</span>
+                        </div>
                     </div>
                     <div class="revenue-source-item">
                         <div class="name">
                             <div class="icon">🎬</div>
                             <span>Ingresos de Shorts</span>
                         </div>
-                        <div class="value" onclick="openEditModal('shorts-revenue-2')" id="shorts-revenue-2">$982.34</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('shorts-revenue-2')" id="shorts-revenue-2">$982.34</div>
+                            <span class="percent-change percent-up">+22.5%</span>
+                        </div>
                     </div>
                     <div class="revenue-source-item">
                         <div class="name">
                             <div class="icon">📢</div>
                             <span>Ingresos de anuncios</span>
                         </div>
-                        <div class="value" onclick="openEditModal('ads-revenue-2')" id="ads-revenue-2">$2,142.13</div>
+                        <div class="value-wrapper">
+                            <div class="value" onclick="openEditModal('ads-revenue-2')" id="ads-revenue-2">$2,142.13</div>
+                            <span class="percent-change percent-up">+13.9%</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -458,6 +522,16 @@
     <script>
         let currentEditTarget = '';
         let chart1 = null, chart2 = null;
+        // 初始基准值（用于计算涨幅）
+        const baseValues = {
+            'revenue-1': 2897.18,
+            'views-1': 626.4,
+            'cpm-1': 8.95,
+            'rpm-1': 4.08,
+            'revenue-2': 2990.12,
+            'rpm-2': 7.09,
+            'cpm-2': 16.01
+        };
 
         // 头像上传
         const profileImg = document.getElementById('profile-img');
@@ -499,7 +573,24 @@
             currentEditTarget = '';
         }
 
-        // 保存编辑的值 + 全量同步（总收益、图表、时间轴）
+        // 计算涨幅百分比
+        function calculatePercentChange(current, base) {
+            const change = ((current - base) / base) * 100;
+            return change.toFixed(1);
+        }
+
+        // 更新涨幅显示
+        function updatePercentDisplay(targetId, currentValue) {
+            if (!baseValues[targetId]) return;
+            const percent = calculatePercentChange(parseFloat(currentValue), baseValues[targetId]);
+            const percentEl = document.getElementById(`${targetId}-percent`);
+            if (percentEl) {
+                percentEl.textContent = percent >= 0 ? `+${percent}%` : `${percent}%`;
+                percentEl.className = `percent-change ${percent >= 0 ? 'percent-up' : 'percent-down'}`;
+            }
+        }
+
+        // 保存编辑的值 + 全量同步（总收益、图表、时间轴、涨幅）
         function saveEditedValue() {
             if (!currentEditTarget) return;
             const rawValue = parseFloat(document.getElementById('edit-input').value);
@@ -510,13 +601,27 @@
 
             // 格式化数值（带货币符号）
             const isPanel1 = currentEditTarget.includes('1');
-            const formattedValue = isPanel1 
-                ? `US$${rawValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-                : `$${rawValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            const isRevenue = currentEditTarget.includes('revenue') || currentEditTarget.includes('cpm') || currentEditTarget.includes('rpm');
+            let formattedValue;
+            
+            if (currentEditTarget.includes('views-1')) {
+                formattedValue = `${rawValue.toLocaleString('en-US', { maximumFractionDigits: 1 })}K`;
+            } else if (isRevenue) {
+                formattedValue = isPanel1 
+                    ? `US$${rawValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                    : `$${rawValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            } else {
+                formattedValue = isPanel1 
+                    ? `US$${rawValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                    : `$${rawValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            }
             
             // 更新当前编辑项的值
             document.getElementById(currentEditTarget).textContent = formattedValue;
             
+            // 更新涨幅百分比
+            updatePercentDisplay(currentEditTarget, rawValue);
+
             // 同步总收益（收益来源项修改后，自动计算总收益）
             if (currentEditTarget.includes('revenue-') && !currentEditTarget.startsWith('revenue-')) {
                 updateTotalRevenue(isPanel1 ? 1 : 2);
@@ -541,11 +646,15 @@
                 total += parseFloat(document.getElementById('members-revenue-1').textContent.replace(/[^\d.]/g, ''));
                 total += parseFloat(document.getElementById('superchat-revenue-1').textContent.replace(/[^\d.]/g, ''));
                 document.getElementById('revenue-1').textContent = `US$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                // 更新总收益涨幅
+                updatePercentDisplay('revenue-1', total);
             } else {
                 total += parseFloat(document.getElementById('transactions-revenue-2').textContent.replace(/[^\d.]/g, ''));
                 total += parseFloat(document.getElementById('shorts-revenue-2').textContent.replace(/[^\d.]/g, ''));
                 total += parseFloat(document.getElementById('ads-revenue-2').textContent.replace(/[^\d.]/g, ''));
                 document.getElementById('revenue-2').textContent = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                // 更新总收益涨幅
+                updatePercentDisplay('revenue-2', total);
             }
         }
 
@@ -644,6 +753,11 @@
 
         // 初始化
         window.onload = () => {
+            // 初始化涨幅显示
+            Object.keys(baseValues).forEach(key => {
+                const currentValue = document.getElementById(key).textContent.replace(/[^\d.]/g, '');
+                updatePercentDisplay(key, currentValue);
+            });
             renderChart1();
             renderChart2();
         };
